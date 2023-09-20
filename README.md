@@ -2,7 +2,25 @@
 
 The JM Web Core template is a powerful sdk for integrating meetings into your Angular and React applications seamlessly. This SDK provides a simple method, `renderMeeting`, to render a meeting UI inside a specified HTML `div` element.
 
+## Setup
+
+#### Register on JioMeet Platform:
+
+You need to first register on Jiomeet platform. [Click here to sign up](https://platform.jiomeet.com/login/signUp)
+
+#### Get your application keys:
+
+Create a new app. Please follow the steps provided in the [Documentation guide](https://dev.jiomeet.com/docs/quick-start/introduction) to create apps before you proceed.
+
+#### Get your Jiomeet meeting id and pin
+
+Use the [create meeting api](https://dev.jiomeet.com/docs/JioMeet%20Platform%20Server%20APIs/create-a-dynamic-meeting) to get your room id and password
+
 ## Installation
+
+1. **Create an `.npmrc` File**: Before installing the sdk, create an `.npmrc` file in the root directory of your project if it doesn't already exist.
+
+2. **Configure Authentication**: In the `.npmrc` file,paste the authentication token shared by our team.
 
 You can install the MeetingSDK using npm or yarn:
 
@@ -10,15 +28,7 @@ You can install the MeetingSDK using npm or yarn:
 npm install @jiomeet/jm-web-core-template
 ```
 
-## Usage
-
-### Creating Meeting
-
-For creating meetings visit [dev.jiomeet.com](https://dev.jiomeet.com) platform after creating meeting pass that detail in the preview screen UI
-
-which you will see after calling renderMeeting function as describe below.
-
-### How to Integrate
+## How to Integrate
 
 #### Angular
 
