@@ -18,11 +18,11 @@ Use the [create meeting api](https://dev.jiomeet.com/docs/JioMeet%20Platform%20S
 
 ## Installation
 
-1. **Create an `.npmrc` File**: Before installing the sdk, create an `.npmrc` file in the root directory of your project if it doesn't already exist.
+1. _Create an `.npmrc` File_: Before installing the sdk, create an `.npmrc` file in the root directory of your project if it doesn't already exist.
 
-2. **Configure Authentication**: In the `.npmrc` file,paste the authentication token shared by our team.
+2. _Configure Authentication_: In the `.npmrc` file,paste the authentication token shared by our team.
 
-You can install the MeetingSDK using npm or yarn:
+You can install the SDK using npm :
 
 ```bash
 npm install @jiomeet/jm-web-core-template
