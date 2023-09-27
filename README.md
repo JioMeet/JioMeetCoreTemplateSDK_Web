@@ -18,17 +18,34 @@ Use the [create meeting api](https://dev.jiomeet.com/docs/JioMeet%20Platform%20S
 
 ## Installation
 
-1. _Create an `.npmrc` File_: Before installing the sdk, create an `.npmrc` file in the root directory of your project if it doesn't already exist.
-
-2. _Configure Authentication_: In the `.npmrc` file,paste the authentication token shared by our team.
-
 You can install the SDK using npm :
 
 ```bash
 npm install @jiomeet/jm-web-core-template
 ```
 
-## How to Integrate
+## `renderMeeting`
+
+The `renderMeeting` function is the core of the Core-template and is used to embed a meeting UI within your web application. It is the only function exposed from the sdk. It takes two important arguments:
+
+##### Parameters:
+
+- **element** : HTML div element
+  The first argument is an HTML element where the meeting UI will be rendered.
+- **meetingConfigurations** :[`IJMMeetingConfiguration`](#ijmmeetingconfiguration) | `Optional`
+  - **meetingDetails**:[`IJMMeetingDetails`](#ijmmeetingdetails)
+    Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
+    - **meetingId** : `string`  
+      Meeting ID of the meeting user is going to
+    - **meetingPin** : `string`  
+       Meeting PIN of the meeting user is going to
+    - **userDisplayName** : `string`  
+       Display Name with which user is going to join the meeting.
+    - **config** :
+      - **userRole** : `"host" | "audience" | "speaker"`  
+        Role of the user in the meeting. Possible values are .host, .speaker, .audience. If you are assigning .host value, please pass the token in its argument
+      - **token?** `Optional` : `string`  
+        Token is optional property only required when you pass userRole as a host
 
 #### Angular
 
@@ -39,16 +56,28 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { renderMeeting } from '@jiomeet/jm-web-core-template';
 
 @Component({
-	selector: 'app-meeting',
-	template: '<div #meetingElement></div>',
+  selector: 'app-meeting',
+  template: '<div #meetingElement></div>',
 })
 export class MeetingComponent implements AfterViewInit {
-	@ViewChild('meetingElement', { static: true })
-	meetingContainerRef: ElementRef;
+  @ViewChild('meetingElement', { static: true })
+  meetingContainerRef: ElementRef;
 
-	ngAfterViewInit() {
-		renderMeeting(this.meetingContainerRef.nativeElement);
-	}
+  ngAfterViewInit() {
+    // Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
+    const meetingConfigurations = {
+      meetingDetails{
+      meetingId: 'yourMeetingId',
+      meetingPin: 'yourMeetingPin',
+      userDisplayName: 'Your Name',
+      config: {
+        userRole: 'host', // 'host', 'audience', or 'speaker'
+        token: 'yourToken',
+      },
+      }
+    };
+    renderMeeting(this.meetingContainerRef.nativeElement,meetingConfigurations);
+  }
 }
 ```
 
@@ -67,13 +96,25 @@ import React, { useEffect, useRef } from 'react';
 import { renderMeeting } from '@jiomeet/jm-web-core-template';
 
 function MeetingComponent() {
-	const meetingComponentRef = useRef(null);
+  const meetingComponentRef = useRef(null);
 
-	useEffect(() => {
-		renderMeeting(meetingComponentRef.current);
-	}, []);
+  useEffect(() => {
+    // Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
+    const meetingConfigurations = {
+      meetingDetails{
+      meetingId: 'yourMeetingId',
+      meetingPin: 'yourMeetingPin',
+      userDisplayName: 'Your Name',
+      config: {
+        userRole: 'host', // 'host', 'audience', or 'speaker'
+        token: 'yourToken',
+      },
+      }
+    };
+    renderMeeting(meetingComponentRef.current,meetingConfigurations);
+  }, []);
 
-	return <div ref={meetingComponentRef}></div>;
+  return <div ref={meetingComponentRef}></div>;
 }
 
 export default MeetingComponent;
@@ -94,4 +135,28 @@ function App() {
 }
 
 export default App;
+```
+
+**Interfaces**
+
+#### `IJMMeetingConfiguration`
+
+```typescript
+export interface IJMMeetingConfiguration {
+	meetingDetails?: IJMMeetingDetails;
+}
+```
+
+#### `IJMMeetingDetails`
+
+```typescript
+export interface IJMMeetingDetails {
+	meetingId: string;
+	meetingPin: string;
+	userDisplayName?: string;
+	config?: {
+		userRole?: 'host' | 'audience' | 'speaker';
+		token?: string;
+	};
+}
 ```
