@@ -1,8 +1,29 @@
-# 🚀 JM Web Core Template Documentation
+<p align="center" >
+  <img src="https://jiomeetpro.jio.com/assets/img/website/website_logo_header_light.svg" title="logo" float=center  height="150">
+</p>
 
-The JM Web Core template is a powerful sdk for integrating meetings into your Angular and React applications seamlessly. This SDK provides a simple method, `renderMeeting`, to render a meeting UI inside a specified HTML `div` element.
+# 👋 JioMeet Web Core Template
 
-## Setup
+The JioMeet Web Core template is a powerful sdk for integrating meetings into your Angular and React applications seamlessly.It provides a simple method, `renderMeeting`, to render a meeting UI inside a specified HTML `div` element. You get everything you need for meetings joining-calls, audio, video, screenShare, whiteboard and many more, all in one easy-to-use package. Make your app more collaborative and cool with JioMeet Core Template! 🌐🚀.
+
+## Table of Contents
+
+- [🚀 How to Install SDK](#🚀-how-to-install-sdk)
+- [🏁 Setup](#🏁-setup)
+- [⚡ Feature](#⚡-feature)
+- [🧩 How to Integrate](#🧩-how-to-integrate)
+
+## 🚀 How to Install SDK
+
+You can install the SDK using npm :
+
+To install via [NPM](https://www.npmjs.com/):
+
+```bash
+npm install @jiomeet/core-template-web
+```
+
+## 🏁 Setup
 
 #### Register on JioMeet Platform:
 
@@ -16,15 +37,9 @@ Create a new app. Please follow the steps provided in the [Documentation guide](
 
 Use the [create meeting api](https://dev.jiomeet.com/docs/JioMeet%20Platform%20Server%20APIs/create-a-dynamic-meeting) to get your room id and password
 
-## Installation
+## ⚡ Feature
 
-You can install the SDK using npm :
-
-```bash
-npm install @jiomeet/jm-web-core-template
-```
-
-## `renderMeeting`
+### renderMeeting
 
 The `renderMeeting` function is the core of the Core-template and is used to embed a meeting UI within your web application. It is the only function exposed from the sdk. It takes two important arguments:
 
@@ -47,37 +62,39 @@ The `renderMeeting` function is the core of the Core-template and is used to emb
       - **token?** `Optional` : `string`  
         Token is optional property only required when you pass userRole as a host
 
-#### Angular
+## 🧩 How to Integrate
+
+### In Angular
 
 In your Angular component file:
 
 ```typescript
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { renderMeeting } from '@jiomeet/jm-web-core-template';
+import { renderMeeting } from '@jiomeet/core-template-web';
 
 @Component({
-  selector: 'app-meeting',
-  template: '<div #meetingElement></div>',
+	selector: 'app-meeting',
+	template: '<div #meetingElement></div>',
 })
 export class MeetingComponent implements AfterViewInit {
-  @ViewChild('meetingElement', { static: true })
-  meetingContainerRef: ElementRef;
+	@ViewChild('meetingElement', { static: true })
+	meetingContainerRef: ElementRef;
 
-  ngAfterViewInit() {
-    // Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
-    const meetingConfigurations = {
-      meetingDetails{
-      meetingId: 'yourMeetingId',
-      meetingPin: 'yourMeetingPin',
-      userDisplayName: 'Your Name',
-      config: {
-        userRole: 'host', // 'host', 'audience', or 'speaker'
-        token: 'yourToken',
-      },
-      }
-    };
-    renderMeeting(this.meetingContainerRef.nativeElement,meetingConfigurations);
-  }
+	ngAfterViewInit() {
+		// Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
+		const meetingConfigurations = {
+			meetingDetails: {
+				meetingId: 'yourMeetingId',
+				meetingPin: 'yourMeetingPin',
+				userDisplayName: 'Your Name',
+				config: {
+					userRole: 'host', // 'host', 'audience', or 'speaker'
+					token: 'yourToken',
+				},
+			},
+		};
+		renderMeeting(this.meetingContainerRef.nativeElement, meetingConfigurations);
+	}
 }
 ```
 
@@ -87,34 +104,34 @@ In your Angular component's HTML template, include the app-meeting selector wher
 <app-meeting></app-meeting>
 ```
 
-### React
+### In React
 
 In your React component file:
 
 ```typescript
 import React, { useEffect, useRef } from 'react';
-import { renderMeeting } from '@jiomeet/jm-web-core-template';
+import { renderMeeting } from '@jiomeet/core-template-web';
 
 function MeetingComponent() {
-  const meetingComponentRef = useRef(null);
+	const meetingComponentRef = useRef(null);
 
-  useEffect(() => {
-    // Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
-    const meetingConfigurations = {
-      meetingDetails{
-      meetingId: 'yourMeetingId',
-      meetingPin: 'yourMeetingPin',
-      userDisplayName: 'Your Name',
-      config: {
-        userRole: 'host', // 'host', 'audience', or 'speaker'
-        token: 'yourToken',
-      },
-      }
-    };
-    renderMeeting(meetingComponentRef.current,meetingConfigurations);
-  }, []);
+	useEffect(() => {
+		// Pass meeting details to auto-fill on the preview screen, or omit it to enter details manually.
+		const meetingConfigurations = {
+			meetingDetails: {
+				meetingId: 'yourMeetingId',
+				meetingPin: 'yourMeetingPin',
+				userDisplayName: 'Your Name',
+				config: {
+					userRole: 'host', // 'host', 'audience', or 'speaker'
+					token: 'yourToken',
+				},
+			},
+		};
+		renderMeeting(meetingComponentRef.current, meetingConfigurations);
+	}, []);
 
-  return <div ref={meetingComponentRef}></div>;
+	return <div ref={meetingComponentRef}></div>;
 }
 
 export default MeetingComponent;
