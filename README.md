@@ -11,16 +11,21 @@ For our React enthusiasts, we've got exciting news! Introducing separate compone
 ## Table of Contents
 
 - [👋 Introduction](#-jioMeet-web-core-template-sdk)
+- [🚀 How to Install SDK](#-how-to-install-sdk)
 - [🏁 Setup](#-setup)
 - [🌟 Provider](#-provider)
 - [🎨 Component](#-component)
 - [🪝 Hooks](#-hooks)
 
-# 👋 JioMeet Core Template Web SDK
+## 🚀 How to Install SDK
 
-Meet the JioMeet Web Core template—a robust SDK that seamlessly integrates meetings into your Angular and React applications. With the simplicity of renderCompositeView, you can now enhance collaboration in your app. Join calls, utilize audio, video, screenShare, whiteboard, and more—all effortlessly packaged in one user-friendly solution. Elevate your app's collaboration game with the JioMeet Core Template! 🌐🚀
+You can install the SDK using npm :
 
-For our React enthusiasts, we've got exciting news! Introducing separate components for rendering preview, conference UI, and additional hooks—making your React experience even more versatile and tailored to your needs. It's time to redefine collaboration in your applications! 🚀
+To install via [NPM](https://www.npmjs.com/):
+
+```bash
+npm install @jiomeet/core-template-web
+```
 
 ## 🏁 Setup
 
